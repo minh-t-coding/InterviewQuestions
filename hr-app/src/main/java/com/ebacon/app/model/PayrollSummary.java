@@ -27,13 +27,14 @@ public class PayrollSummary {
 
     @Override
     public String toString() {
-        return String.format(
-            "PayrollSummary for %s:\n" +
-            "  Regular Hours : %.4f\n" +
-            "  Overtime Hours: %.4f\n" +
-            "  Doubletime Hours: %.4f\n" +
-            "  Wage Total    : $%.4f\n" +
-            "  Benefit Total : $%.4f\n",
+        return String.format("""
+                             PayrollSummary for %s:
+                               Regular Hours : %.4f
+                               Overtime Hours: %.4f
+                               Doubletime Hours: %.4f
+                               Wage Total    : $%.4f
+                               Benefit Total : $%.4f
+                             """,
             employeeName,
             regularHours,
             overtimeHours,

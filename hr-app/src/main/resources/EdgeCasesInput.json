@@ -1,0 +1,97 @@
+{
+    "jobMeta": [
+      {
+        "job": "Hospital - Painter",
+        "rate": 31.25,
+        "benefitsRate": 1
+      },
+      {
+        "job": "Hospital - Laborer",
+        "rate": 20.0,
+        "benefitsRate": 0.5
+      },
+      {
+        "job": "Shop - Laborer",
+        "rate": 16.25,
+        "benefitsRate": 1.25
+      }
+    ],
+    "employeeData": [
+      {
+        "employee": "EdgeCase_Exact40",
+        "timePunch": [
+          {
+            "job": "Hospital - Painter",
+            "start": "2025-08-25 08:00:00",
+            "end": "2025-08-25 18:00:00"
+          },
+          {
+            "job": "Hospital - Painter",
+            "start": "2025-08-26 08:00:00",
+            "end": "2025-08-26 18:00:00"
+          },
+          {
+            "job": "Hospital - Painter",
+            "start": "2025-08-27 08:00:00",
+            "end": "2025-08-27 18:00:00"
+          },
+          {
+            "job": "Hospital - Painter",
+            "start": "2025-08-28 08:00:00",
+            "end": "2025-08-28 18:00:00"
+          }
+        ]
+      },
+      {
+        "employee": "EdgeCase_Over48",
+        "timePunch": [
+          {
+            "job": "Hospital - Laborer",
+            "start": "2025-08-25 07:00:00",
+            "end": "2025-08-25 19:00:00"
+          },
+          {
+            "job": "Hospital - Laborer",
+            "start": "2025-08-26 07:00:00",
+            "end": "2025-08-26 19:00:00"
+          },
+          {
+            "job": "Hospital - Laborer",
+            "start": "2025-08-27 07:00:00",
+            "end": "2025-08-27 19:00:00"
+          },
+          {
+            "job": "Hospital - Laborer",
+            "start": "2025-08-28 07:00:00",
+            "end": "2025-08-28 21:00:00"
+          }
+        ]
+      },
+      {
+        "employee": "EdgeCase_ZeroHours",
+        "timePunch": [
+          {
+            "job": "Shop - Laborer",
+            "start": "2025-08-25 08:00:00",
+            "end": "2025-08-25 08:00:00" 
+          }
+        ]
+      },
+      {
+        "employee": "EdgeCase_Fractional",
+        "timePunch": [
+          {
+            "job": "Shop - Laborer",
+            "start": "2025-08-25 08:15:00",
+            "end": "2025-08-25 12:45:00"
+          },
+          {
+            "job": "Hospital - Painter",
+            "start": "2025-08-25 13:30:00",
+            "end": "2025-08-25 17:15:00"
+          }
+        ]
+      }
+    ]
+  }
+  
