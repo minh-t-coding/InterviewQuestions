@@ -43,7 +43,7 @@ class PayrollCalculatorTest {
                 40,      // doubletime limit
                 2.0,     // overtime rate
                 2.5,     // doubletime rate
-                "yyyy-MM-dd HH:mm:ss"
+                "MM-dd-yyyy HH:mm:ss"
         );
         customCalculator = new PayrollCalculator(jobLookup, customRules);
     }
@@ -77,17 +77,17 @@ class PayrollCalculatorTest {
         TimePunch punch = new TimePunch();
         punch.setJob("DEV");
         punch.setStart("2025-08-26 09:00:00");
-        punch.setEnd("2025-08-27 02:00:00"); // 17 hours
+        punch.setEnd("2025-08-28 11:00:00"); // 50 hours
 
         emp.setTimePunches(Arrays.asList(punch));
 
         PayrollSummary summary = defaultCalculator.calculate(emp);
 
-        // Default config: OVERTIME_LIMIT = 40, DOUBLETIME_LIMIT = 48
-        // 17 < 40, so all counted as regular? Actually based on original logic, adjust if needed.
-        assertEquals(17.0, summary.getRegular(), 0.01);
-        assertEquals(0.0, summary.getOvertime(), 0.01);
-        assertEquals(0.0, summary.getDoubletime(), 0.01);
+        assertEquals(40.0, summary.getRegular(), 0.01);
+        assertEquals(8.0, summary.getOvertime(), 0.01);
+        assertEquals(2.0, summary.getDoubletime(), 0.01);
+        assertEquals(40 * 50.0 + 8 * 50 * 1.5 + 2 * 50 * 2, summary.getWageTotal(), 0.01);
+        assertEquals(50 * 5.0, summary.getBenefitTotal(), 0.01);
     }
 
     @Test
@@ -97,38 +97,38 @@ class PayrollCalculatorTest {
 
         TimePunch punch = new TimePunch();
         punch.setJob("DEV");
-        punch.setStart("2025-08-26 09:00:00");
-        punch.setEnd("2025-08-27 02:00:00"); // 17 hours
+        punch.setStart("08-26-2025 09:00:00");
+        punch.setEnd("08-27-2025 02:00:00"); // 17 hours
 
         emp.setTimePunches(Arrays.asList(punch));
 
         PayrollSummary summary = customCalculator.calculate(emp);
 
-        // Custom config: OVERTIME_LIMIT = 30, DOUBLETIME_LIMIT = 40
-        // 17 hours < 30, so all counted as regular
         assertEquals(17.0, summary.getRegular(), 0.01);
         assertEquals(0.0, summary.getOvertime(), 0.01);
         assertEquals(0.0, summary.getDoubletime(), 0.01);
+        assertEquals(17 * 50.0, summary.getWageTotal(), 0.01);
+        assertEquals(17 * 5.0, summary.getBenefitTotal(), 0.01);
     }
 
     @Test
-    void testOvertimeWithCustomConfig() {
+    void testOvertimeAndDoubletimeWithCustomConfig() {
         Employee emp = new Employee();
         emp.setEmployeeName("Dana");
 
         TimePunch punch = new TimePunch();
-        punch.setJob("DEV");
-        punch.setStart("2025-08-26 09:00:00");
-        punch.setEnd("2025-08-27 12:00:00"); // 27 hours
+        punch.setJob("QA");
+        punch.setStart("08-26-2025 09:00:00");
+        punch.setEnd("08-28-2025 06:00:00"); // 45 hours
 
         emp.setTimePunches(Arrays.asList(punch));
 
         PayrollSummary summary = customCalculator.calculate(emp);
 
-        // Custom config: OVERTIME_LIMIT = 30, DOUBLETIME_LIMIT = 40
-        // 27 < 30, still regular
-        assertEquals(27.0, summary.getRegular(), 0.01);
-        assertEquals(0.0, summary.getOvertime(), 0.01);
-        assertEquals(0.0, summary.getDoubletime(), 0.01);
+        assertEquals(30.0, summary.getRegular(), 0.01);
+        assertEquals(10.0, summary.getOvertime(), 0.01);
+        assertEquals(5.0, summary.getDoubletime(), 0.01);
+        assertEquals(30 * 40.0 + 10 * 40 * 2 + 5 * 40 * 2.5, summary.getWageTotal(), 0.01);
+        assertEquals(45 * 4.0, summary.getBenefitTotal(), 0.01);
     }
 }
