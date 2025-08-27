@@ -28,6 +28,7 @@ Make sure the following are installed on your system:
 
 ```bash
 git clone <your-repo-url>
+cd InterviewQuestions
 cd hr-app
 ```
 
@@ -59,6 +60,9 @@ java -jar target/hr-app-1.0-SNAPSHOT.jar
 
 # Or specify a custom input file
 java -jar target/hr-app-1.0-SNAPSHOT.jar path/to/your/input.jsonc
+
+# As an included example
+java -jar target/hr-app-1.0-SNAPSHOT.jar src/main/resources/EdgeCasesInput.json
 ```
 
 **Output:**
