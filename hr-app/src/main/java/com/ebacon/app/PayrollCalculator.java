@@ -47,6 +47,7 @@ public class PayrollCalculator {
                 end = LocalDateTime.parse(punch.getEnd(), FORMATTER);
             } catch (Exception e) {
                 System.err.println(String.format("ERR - Could not format time punch %s for Employee: %s", punch.toString(), emp.getEmployeeName()));
+                e.printStackTrace(System.err);
                 continue;
             }
             double hours = Duration.between(start, end).toSeconds() / 3600.0; // 3600 seconds in an hour
