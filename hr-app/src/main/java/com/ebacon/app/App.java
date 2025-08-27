@@ -12,9 +12,13 @@ import com.ebacon.app.writers.JsonReportWriter;
 
 public class App {
     public static void main(String[] args) throws Exception {
+        System.out.println("Program starting...");
+        
         String inputFilePath = (args.length > 0) ? args[0] : "/PunchLogicTest.jsonc";
 
         DataLoader dataLoader = new DataLoader(inputFilePath);
+        System.out.println("Reading in data from: " + inputFilePath);
+
         // Convert JobMeta JSON to POJOs
         JobMeta[] jobs = dataLoader.loadArray("jobMeta", JobMeta[].class);
         // Convert Employee JSON to POJOs
@@ -29,6 +33,7 @@ public class App {
         List<PayrollSummary> allSummaries = new ArrayList<>();
 
         // Calculate summary for each employee
+        System.out.println("Calculating payrolls...");
         for (Employee emp : employees) {
             PayrollSummary currentEmployeeSummary = payrollCalculator.calculate(emp);
             allSummaries.add(currentEmployeeSummary);
@@ -36,5 +41,6 @@ public class App {
         
         IReportWriter writer = new JsonReportWriter();
         writer.writeReport(allSummaries, "output.json");
+        System.out.println("Payroll report successfully written to output.json!");
     }
 }
